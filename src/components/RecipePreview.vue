@@ -2,8 +2,8 @@
   <router-link
     :to="{ name: 'recipe', params: { recipeId: recipe.id } }"
     class="recipe-preview"
-  >
-    <div class="recipe-body">
+>
+    <!-- <div class="recipe-body">
       <img v-if="image_load" :src="recipe.image" class="recipe-image" />
     </div>
     <div class="recipe-footer">
@@ -17,7 +17,26 @@
         <li v-if="recipe.vegetarian">Vegetarian</li>
         <li v-if="recipe.glutenFree">Gluten Free</li>
       </ul>
-    </div>
+    </div> -->
+
+    <div>
+  <b-card
+
+    img-top
+    style="max-width: 20rem;"
+    class="mb-2"
+  >
+    <b-card-title> {{recipe.title}}</b-card-title>
+    <img v-if="image_load" :src="recipe.image" class="recipe-image" style="max-width: 17rem;"/>
+    <b-card-text>{{ recipe.readyInMinutes }} minutes</b-card-text>
+    <b-card-text>{{ recipe.popularity }} likes</b-card-text>
+    <b-card-text v-if="recipe.vegan">Vegan</b-card-text>
+    <b-card-text v-if="recipe.vegetarian">Vegetarian</b-card-text>
+    <b-card-text v-if="recipe.glutenFree">Gluten Free</b-card-text>
+    <!-- check -->
+    <b-button @click="addToFavorites" variant="primary">Add to Favorites</b-button>
+  </b-card>
+</div>
   </router-link>
 </template>
 
@@ -37,6 +56,33 @@ export default {
     recipe: {
       type: Object,
       required: true
+    }
+  },
+  methods: {
+    async addToFavorites() {
+      try {
+        this.$root.store.server_domain = "http://127.0.0.1:80"; //TODO delete
+        const response = await this.axios.post(
+          // "https://test-for-3-2.herokuapp.com/user/Login",
+          // main.server_domain + "/Login",
+          this.$root.store.server_domain +"/user/favorites",
+          // "http://132.72.65.211:80/Login",
+          // "http://132.73.84.100:80/Login",
+
+          {
+            // username: this.form.username,
+            recipeId: this.recipe.id
+          }
+        );
+        // console.log(response);
+        // this.$root.loggedIn = true;
+        // console.log(this.$root.store.login);
+        // this.$root.store.login(this.form.username);
+        // this.$router.push("/");
+      } catch (err) {
+        console.log(err.response);
+        // this.form.submitError = err.response.data.message;
+      }
     }
   }
 };

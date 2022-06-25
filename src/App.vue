@@ -1,18 +1,46 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link :to="{ name: 'main' }">Vue Recipes</router-link>|
-      <router-link :to="{ name: 'search' }">Search</router-link>|
-      {{ !$root.store.username }}
-      <span v-if="!$root.store.username">
-        Guest:
-        <router-link :to="{ name: 'register' }">Register</router-link>|
-        <router-link :to="{ name: 'login' }">Login</router-link>|
-      </span>
-      <span v-else>
-        {{ $root.store.username }}: <button @click="Logout">Logout</button>|
-      </span>
-    </div>
+
+    <div>
+  <b-navbar toggleable="lg" type="dark" variant="info">
+    <b-navbar-brand href="#">Recipes</b-navbar-brand>
+
+    <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
+
+    <b-collapse id="nav-collapse" is-nav>
+      <b-navbar-nav>
+        <router-link :to="{ name: 'main' }"><b-nav-item href="/">Home</b-nav-item></router-link>
+        <router-link :to="{ name: 'search' }"><b-nav-item href="/search">Search</b-nav-item></router-link>
+
+        <router-link :to="{ name: 'about' }"><b-nav-item href="/about">About</b-nav-item></router-link>
+
+
+        <b-nav-item-dropdown v-if="$root.store.username" right>
+          <!-- Using 'button-content' slot -->
+          <template #button-content>
+            <em>{{$root.store.username}}</em>
+          </template>
+          <b-dropdown-item href="/user/favorites"><router-link :to="{ name: 'favorites' }">My Favorite Recipes</router-link>
+          </b-dropdown-item>
+          <b-dropdown-item href="/user/family"><router-link :to="{ name: 'family' }">My Family Recipes</router-link>
+          </b-dropdown-item>
+          <b-dropdown-item href="/user/created"><router-link :to="{ name: 'created' }">My Recipes</router-link>
+          </b-dropdown-item>
+          <b-dropdown-item href="#" @click="Logout">Logout</b-dropdown-item>
+        </b-nav-item-dropdown>
+        <b-nav-item-dropdown v-else>
+          <!-- Using 'button-content' slot -->
+          <template #button-content>
+            <em>Hello Guest</em>
+          </template>
+
+          <router-link :to="{ name: 'register' }"><b-dropdown-item href="/register">Register</b-dropdown-item></router-link>
+          <router-link :to="{ name: 'login' }"><b-dropdown-item href="/login">Login</b-dropdown-item></router-link>
+        </b-nav-item-dropdown>
+      </b-navbar-nav>
+    </b-collapse>
+  </b-navbar>
+</div>
     <router-view />
   </div>
 </template>
@@ -35,9 +63,10 @@ export default {
 
 <style lang="scss">
 @import "@/scss/form-style.scss";
+@import url('https://fonts.googleapis.com/css2?family=Handlee&display=swap');
 
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: 'Handlee', cursive;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
@@ -48,12 +77,5 @@ export default {
   padding: 30px;
 }
 
-#nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
 
-#nav a.router-link-exact-active {
-  color: #42b983;
-}
 </style>
