@@ -12,7 +12,10 @@
       </div>
       <ul class="recipe-overview">
         <li>{{ recipe.readyInMinutes }} minutes</li>
-        <li>{{ recipe.aggregateLikes }} likes</li>
+        <li>{{ recipe.popularity }} likes</li>
+        <li v-if="recipe.vegan">Vegan</li>
+        <li v-if="recipe.vegetarian">Vegetarian</li>
+        <li v-if="recipe.glutenFree">Gluten Free</li>
       </ul>
     </div>
   </router-link>
@@ -35,30 +38,6 @@ export default {
       type: Object,
       required: true
     }
-
-    // id: {
-    //   type: Number,
-    //   required: true
-    // },
-    // title: {
-    //   type: String,
-    //   required: true
-    // },
-    // readyInMinutes: {
-    //   type: Number,
-    //   required: true
-    // },
-    // image: {
-    //   type: String,
-    //   required: true
-    // },
-    // aggregateLikes: {
-    //   type: Number,
-    //   required: false,
-    //   default() {
-    //     return undefined;
-    //   }
-    // }
   }
 };
 </script>

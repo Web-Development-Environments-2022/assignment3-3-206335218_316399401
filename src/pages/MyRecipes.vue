@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <h1 class="title">Search Page</h1>
+    <h1 class="title">My Recipes</h1>
   </div>
 </template>
 
@@ -11,4 +11,3 @@
 <style>
 
 </style>
-
