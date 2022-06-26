@@ -209,6 +209,9 @@ export default {
       this.cuisines.push(...cuisines);
       this.intolerances.push(...intolerances);
       this.diets.push(...diets);
+      if(this.$root.store.lastsearch != null && this.$root.store.username){
+        this.recipes = this.$root.store.lastsearch
+      }
     // console.log($v);
     },
     computed: {
@@ -241,6 +244,10 @@ export default {
         const recipes = response.data;
         this.recipes = [];
         this.recipes.push(...recipes);
+        if(this.$root.store.username){
+          this.$root.store.lastsearch = this.recipes;
+        }
+        
         } catch(err){
           console.log(err.response);
         }

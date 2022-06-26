@@ -1,8 +1,10 @@
 <template>
   <div class="container">
     <h1 class="title">Main Page</h1>
+    <b-col>
     <RecipePreviewList title="Random Recipes" class="RandomRecipes center" />
-    <router-link v-if="!$root.store.username" to="/login" tag="button">You need to Login to view this</router-link>
+    </b-col>
+    <b-col><router-link v-if="!$root.store.username" to="/login" tag="button">You need to Login to view this</router-link>
     <!-- {{ !$root.store.username }} -->
     <RecipePreviewList
       title="Last Viewed Recipes"
@@ -12,7 +14,7 @@
         center: true
       }"
       disabled
-    ></RecipePreviewList>
+    ></RecipePreviewList></b-col>
     <!-- <div
       style="position: absolute;top: 70%;left: 50%;transform: translate(-50%, -50%);"
     >
