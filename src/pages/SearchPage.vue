@@ -43,7 +43,9 @@
         <b-form-select v-model="intolerance" :options="intolerances"></b-form-select>
       </b-col>
     </b-row> -->
-    <b-button v-b-toggle.collapse-1 variant="outline-info" class="mb-2">Filtering</b-button>
+    <b-button v-b-toggle.collapse-1 variant="outline-info" class="mb-2">
+     Filtering</b-button>
+      <!-- <b-icon icon="sliders"></b-icon> -->
     <!-- <b-button v-b-toggle.collapse-1 variant="info">Filtering</b-button> -->
       <b-collapse id="collapse-1" class="mt-2">
     <b-form-group label-for="tags-component-select">
@@ -168,7 +170,13 @@
       >
       </b-row>
     </b-form>
+    <b-dropdown v-if="this.recipes.length > 0" id="dropdown-1" variant="outline-info" text="Sort By" class="m-md-2">
+    <b-dropdown-item @click="sortByPopularity">Popularity</b-dropdown-item>
+    <b-dropdown-item @click="sortByReady">Ready In Minutes</b-dropdown-item>
+    </b-dropdown>
+    <br/>
     <b-row>
+      
       <b-row v-for="r in recipes" :key="r.id">
         <RecipePreview class="recipePreview" :recipe="r" />
       </b-row>
@@ -195,6 +203,8 @@ export default {
         diets: [],
         intolerances: [],
         recipes: [],
+        popSort: [],
+        readySort: [],
         numOptions: [
           {value: 5, text: '5'},
           {value: 10, text: '10'},
@@ -224,7 +234,6 @@ export default {
       availableIntolerancesOptions() {
         return this.intolerances.filter(opt => this.intolerance.indexOf(opt) === -1)
       },
-
       },
     methods: {
       async Search(){
@@ -261,7 +270,13 @@ export default {
         // this.$nextTick(() => {
         //   this.$v.$reset();
         // }); 
-      }
+      },
+      sortByPopularity(){
+        this.recipes = this.recipes.sort((a,b) => b.popularity - a.popularity);
+      },
+      sortByReady(){
+        this.recipes = this.recipes.sort((a,b) => b.readyInMinutes - a.readyInMinutes);
+      },      
     },
   }
 </script>
