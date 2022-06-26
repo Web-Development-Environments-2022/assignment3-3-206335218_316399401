@@ -61,7 +61,7 @@ export default {
   methods: {
     async addToFavorites() {
       try {
-        this.$root.store.server_domain = "http://127.0.0.1:80"; //TODO delete
+        // this.$root.store.server_domain = "http://127.0.0.1:80"; //TODO delete
         const response = await this.axios.post(
           // "https://test-for-3-2.herokuapp.com/user/Login",
           // main.server_domain + "/Login",

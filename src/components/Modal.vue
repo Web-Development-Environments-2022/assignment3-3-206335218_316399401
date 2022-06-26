@@ -18,11 +18,11 @@
                 <label for="servings" class="col-form-label">Servings:</label>
                 <input type="text" class="form-control" id="servings">
                 <label>Vegan</label>
-                <input type="checkbox" id="vegan"></input>
+                <input type="checkbox" id="vegan">
                 <label>Vegetarian</label>
-                <input type="checkbox" id="vegetarian"></input>
+                <input type="checkbox" id="vegetarian">
                 <label>Gluten Free</label>
-                <input type="checkbox" id="glutenFree"></input>
+                <input type="checkbox" id="glutenFree">
                 <!-- TODO: add image -->
             </div>
             <div class="form-group">
