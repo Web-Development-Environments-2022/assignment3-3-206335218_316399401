@@ -26,7 +26,11 @@
           </b-dropdown-item>
           <b-dropdown-item href="/user/created"><router-link :to="{ name: 'created' }">My Recipes</router-link>
           </b-dropdown-item>
-          <b-dropdown-item data-target="#Modal">Create New Recipe</b-dropdown-item>
+          <b-dropdown-item v-b-modal="'my-modal'">Create New Recipe
+
+          <!-- The modal -->
+          <Modal id="my-modal"></Modal>
+          </b-dropdown-item>
           <b-dropdown-item href="#" @click="Logout">Logout</b-dropdown-item>
         </b-nav-item-dropdown>
         <b-nav-item-dropdown v-else>
@@ -43,17 +47,21 @@
   </b-navbar>
 </div>
     <router-view />
+    <!-- <Modal id="modal-1"></Modal> -->
+    
+    
   </div>
 </template>
 
 <script>
-// import Modal from "././components/Modal";
+import Modal from "././components/Modal";
 
 export default {
   name: "App",
-  // components: {
-  //   Modal
-  // },
+
+  components: {
+    Modal
+  },
   methods: {
     Logout() {
       this.$root.store.logout();

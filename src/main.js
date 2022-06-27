@@ -4,12 +4,16 @@ import VueAxios from "vue-axios";
 import axios from "axios";
 
 import routes from "./routes";
-import { BIcon } from 'bootstrap-vue'
-Vue.component('b-icon', BIcon)
-import { BFormTag } from 'bootstrap-vue'
-Vue.component('b-form-tag', BFormTag)
-import { BFormTags } from 'bootstrap-vue'
-Vue.component('b-form-tags', BFormTags)
+import { BootstrapVue, BootstrapVueIcons } from 'bootstrap-vue'
+Vue.use(BootstrapVue)
+Vue.use(BootstrapVueIcons)
+
+// import { BModal } from 'bootstrap-vue'
+// Vue.component('b-modal', BModal)
+// import { BFormTag } from 'bootstrap-vue'
+// Vue.component('b-form-tag', BFormTag)
+// import { BFormTags } from 'bootstrap-vue'
+// Vue.component('b-form-tags', BFormTags)
 import VueRouter from "vue-router";
 Vue.use(VueRouter);
 const router = new VueRouter({

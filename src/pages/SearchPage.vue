@@ -43,8 +43,7 @@
         <b-form-select v-model="intolerance" :options="intolerances"></b-form-select>
       </b-col>
     </b-row> -->
-    <b-button v-b-toggle.collapse-1 variant="outline-info" class="mb-2">
-     Filtering</b-button>
+    <b-button v-b-toggle.collapse-1 variant="outline-info" class="mb-2">Filtering</b-button>
       <!-- <b-icon icon="sliders"></b-icon> -->
     <!-- <b-button v-b-toggle.collapse-1 variant="info">Filtering</b-button> -->
       <b-collapse id="collapse-1" class="mt-2">
