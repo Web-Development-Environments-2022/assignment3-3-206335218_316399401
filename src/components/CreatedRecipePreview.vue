@@ -42,9 +42,7 @@
 
 <script>
 export default{
-    data(){
 
-    },
     props: {
     recipe: {
       type: Object,

@@ -29,17 +29,17 @@ const routes = [
   },
   //
   {
-    path: "/user/favorites",
+    path: "/favorites",
     name: "favorites",
     component: () => import("./pages/MyFavoriteRecipes"),
   },
   {
-    path: "/user/family",
+    path: "/family",
     name: "family",
     component: () => import("./pages/MyFamilyRecipes"),
   },
   {
-    path: "/user/created",
+    path: "/created",
     name: "created",
     component: () => import("./pages/MyRecipes"),
   },
