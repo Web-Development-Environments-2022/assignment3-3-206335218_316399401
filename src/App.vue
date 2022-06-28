@@ -13,8 +13,9 @@
         <router-link :to="{ name: 'search' }"><b-nav-item href="/search">Search</b-nav-item></router-link>
 
         <router-link :to="{ name: 'about' }"><b-nav-item href="/about">About</b-nav-item></router-link>
-
-
+        <!-- <b-nav-item href="/">Home</b-nav-item>
+        <b-nav-item href="/search">Search</b-nav-item>
+        <b-nav-item href="/about">About</b-nav-item> -->
         <b-nav-item-dropdown v-if="$root.store.username" right>
           <!-- Using 'button-content' slot -->
           <template #button-content>
@@ -26,6 +27,12 @@
           </b-dropdown-item>
           <b-dropdown-item href="/user/created"><router-link :to="{ name: 'created' }">My Recipes</router-link>
           </b-dropdown-item>
+          <!-- <b-dropdown-item href="/user/favorites">My Favorite Recipes
+          </b-dropdown-item>
+          <b-dropdown-item href="/user/family">My Family Recipes
+          </b-dropdown-item>
+          <b-dropdown-item href="/user/created">My Recipes
+          </b-dropdown-item> -->
           <b-dropdown-item v-b-modal="'my-modal'">Create New Recipe
 
           <!-- The modal -->

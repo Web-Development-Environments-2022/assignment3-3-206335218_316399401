@@ -2,9 +2,9 @@
   <div class="container">
     <h1 class="title">Favorite Recipes</h1>
     <b-row>
-      <b-col v-for="r in recipes" :key="r.id">
+      <b-row v-for="r in recipes" :key="r.id">
         <RecipePreview class="recipePreview" :recipe="r" />
-      </b-col>
+      </b-row>
     </b-row>
   </div>
 </template>
@@ -22,6 +22,9 @@ export default{
         recipes: []
       };
     },
+    mounted() {
+    this.updateRecipes();
+  },
     methods: {
       async updateRecipes() {
         try {

@@ -1,10 +1,17 @@
 <template>
   <div class="container">
     <h1 class="title">Main Page</h1>
+    <b-row>
     <b-col>
-    <RecipePreviewList title="Random Recipes" class="RandomRecipes center" />
+    <RecipePreviewList ref="childcomp" title="Random Recipes" class="RandomRecipes center" />
+    <br/>
+    <br/>
+    <br/>
     </b-col>
-    <b-col><router-link v-if="!$root.store.username" to="/login" tag="button">You need to Login to view this</router-link>
+    
+
+    <b-col>
+      <router-link id="router" v-if="!$root.store.username" to="/login" tag="button"><b-button variant="outline-primary">You need to Login to view this</b-button></router-link>
     <!-- {{ !$root.store.username }} -->
     <RecipePreviewList
       title="Last Viewed Recipes"
@@ -14,7 +21,9 @@
         center: true
       }"
       disabled
-    ></RecipePreviewList></b-col>
+    ></RecipePreviewList>
+    </b-col>
+    </b-row>
     <!-- <div
       style="position: absolute;top: 70%;left: 50%;transform: translate(-50%, -50%);"
     >
@@ -43,5 +52,11 @@ export default {
 ::v-deep .blur .recipe-preview {
   pointer-events: none;
   cursor: default;
+}
+#router{
+  border-color: none;
+  background-color: transparent;
+  color: none;
+  border: none;
 }
 </style>

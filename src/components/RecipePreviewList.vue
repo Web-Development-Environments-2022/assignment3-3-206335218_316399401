@@ -4,11 +4,13 @@
       {{ title }}:
       <slot></slot>
     </h3>
-    <b-row>
+    <b-col>
       <b-row v-for="r in recipes" :key="r.id">
         <RecipePreview class="recipePreview" :recipe="r" />
       </b-row>
-    </b-row>
+      <b-button @click="updateRecipes" variant="outline-primary">Random</b-button>
+
+    </b-col>
   </b-container>
 </template>
 

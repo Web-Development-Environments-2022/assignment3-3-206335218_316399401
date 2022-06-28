@@ -174,12 +174,12 @@
     <b-dropdown-item @click="sortByReady">Ready In Minutes</b-dropdown-item>
     </b-dropdown>
     <br/>
-    <b-row>
       
       <b-row v-for="r in recipes" :key="r.id">
-        <RecipePreview class="recipePreview" :recipe="r" />
+        <SearchRecipePreview class="recipePreview" :recipe="r" />
       </b-row>
-    </b-row>
+      <h3 v-if="noRecipes">Oh No! I couldn't find anything :( Try again...</h3>
+
   </div>
 </template>
 
@@ -188,6 +188,9 @@ import cuisines from "../assets/cuisines";
 import diets from "../assets/diets";
 import intolerances from "../assets/intolerances";
 import RecipePreview from "../components/RecipePreview";
+
+import SearchRecipePreview from "../components/SearchRecipePreview";
+
 
 
 export default {
@@ -204,6 +207,7 @@ export default {
         recipes: [],
         popSort: [],
         readySort: [],
+        noRecipes: null,
         numOptions: [
           {value: 5, text: '5'},
           {value: 10, text: '10'},
@@ -212,7 +216,7 @@ export default {
       }
     },
     components: {
-    RecipePreview
+    SearchRecipePreview
   },
     mounted() {
       this.cuisines.push(...cuisines);
@@ -237,6 +241,7 @@ export default {
     methods: {
       async Search(){
         try{
+          this.noRecipes = false
           const response = await this.axios.get(
           // "https://test-for-3-2.herokuapp.com/user/Register",
           this.$root.store.server_domain + "/recipes/searchRecipe",{
@@ -252,12 +257,16 @@ export default {
         const recipes = response.data;
         this.recipes = [];
         this.recipes.push(...recipes);
+        if (this.recipes.length === 0){
+          this.noRecipes=true;
+        }
         if(this.$root.store.username){
           this.$root.store.lastsearch = this.recipes;
         }
         
         } catch(err){
           console.log(err.response);
+          // this.noRecipes = true;
         }
       },
       Reset(){
@@ -274,7 +283,7 @@ export default {
         this.recipes = this.recipes.sort((a,b) => b.popularity - a.popularity);
       },
       sortByReady(){
-        this.recipes = this.recipes.sort((a,b) => b.readyInMinutes - a.readyInMinutes);
+        this.recipes = this.recipes.sort((a,b) => a.readyInMinutes - b.readyInMinutes);
       },      
     },
   }

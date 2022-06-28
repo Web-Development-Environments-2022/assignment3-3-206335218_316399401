@@ -33,7 +33,7 @@
             <button type="button" @click="create" class="btn btn-primary">Create</button>
             </form>
     </div>
-    <b-button class="mt-3" block @click="$bvModal.hide('my-modal')">Close</b-button>
+    <b-button class="mt-3" block @click="close(); $bvModal.hide('my-modal')">Close</b-button>
   </b-modal>
     </div>
 </template>
@@ -74,10 +74,24 @@ export default{
             instructions: this.instructions,
           }
         );
+        this.$root.toast("Create New Recipe", "Recipe created successfully", "success");
+
         // console.log(response);
       } catch (err) {
         console.log(err.response);
       }
+    },
+    close(){
+      this.title = "",
+      this.readyInMinutes= null,
+      this.image= "",
+      this.servings= null,
+      this.vegan= false,
+      this.vegetarian= false,
+      this.glutenFree= false,
+      this.ingredients= "",
+      this.instructions= ""
+      // bvModal.hide('my-modal')
     },
   }
 }

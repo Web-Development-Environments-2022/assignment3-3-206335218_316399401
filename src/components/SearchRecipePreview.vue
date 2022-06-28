@@ -3,31 +3,22 @@
     :to="{ name: 'recipe', params: { recipeId: recipe.id } }"
     class="recipe-preview"
 >
-    <!-- <div class="recipe-body">
-      <img v-if="image_load" :src="recipe.image" class="recipe-image" />
-    </div>
-    <div class="recipe-footer">
-      <div :title="recipe.title" class="recipe-title">
-        {{ recipe.title }}
-      </div>
-      <ul class="recipe-overview">
-        <li>{{ recipe.readyInMinutes }} minutes</li>
-        <li>{{ recipe.popularity }} likes</li>
-        <li v-if="recipe.vegan">Vegan</li>
-        <li v-if="recipe.vegetarian">Vegetarian</li>
-        <li v-if="recipe.glutenFree">Gluten Free</li>
-      </ul>
-    </div> -->
 
     <div>
+        
   <b-card
 
     img-top
-    style="max-width: 20rem;"
+    style="max-width: 100rem;"
     class="mb-2"
   >
+  <b-row>
+  <b-col>
     <b-card-title> {{recipe.title}}</b-card-title>
-    <img  :src="recipe.image" class="recipe-image" style="max-width: 17rem;"/> <!--v-if="image_load"-->
+    <img  :src="recipe.image" class="recipe-image" style="max-width: 17rem;"/>
+  </b-col>
+     <!--v-if="image_load"-->
+     <b-col>
     <b-card-text>{{ recipe.readyInMinutes }} minutes</b-card-text>
     <b-card-text>{{ recipe.popularity }} likes</b-card-text>
     <b-card-text v-if="recipe.vegan">Vegan</b-card-text>
@@ -35,6 +26,20 @@
     <b-card-text v-if="recipe.glutenFree">Gluten Free</b-card-text>
     <!-- check -->
     <b-button @click="addToFavorites" variant="primary">Add to Favorites</b-button>
+
+     </b-col>
+
+     <b-col>
+        <div class="wrapped">
+            Instructions:
+            <ol>
+              <li v-for="s in this.instructionsFull" :key="s.number">
+                {{ s.step }}
+              </li>
+            </ol>
+          </div>
+     </b-col>
+    </b-row>
   </b-card>
 </div>
   </router-link>
@@ -50,6 +55,7 @@ export default {
   data() {
     return {
       // image_load: false
+      instructionsFull: null
     };
   },
   props: {
@@ -57,6 +63,9 @@ export default {
       type: Object,
       required: true
     }
+  },
+  mounted(){
+    this.createInstructions()
   },
   methods: {
     async addToFavorites() {
@@ -84,6 +93,14 @@ export default {
         console.log(err.response);
         // this.form.submitError = err.response.data.message;
       }
+    },
+    async createInstructions(){
+        this.instructionsFull = this.recipe.analyzedInstructions
+        .map((fstep) => {
+          fstep.steps[0].step = fstep.name + fstep.steps[0].step;
+          return fstep.steps;
+        })
+        .reduce((a, b) => [...a, ...b], []);
     }
   }
 };

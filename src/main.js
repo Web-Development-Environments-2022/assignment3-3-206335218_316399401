@@ -4,16 +4,13 @@ import VueAxios from "vue-axios";
 import axios from "axios";
 
 import routes from "./routes";
-import { BootstrapVue, BootstrapVueIcons } from 'bootstrap-vue'
-Vue.use(BootstrapVue)
-Vue.use(BootstrapVueIcons)
+import { BootstrapVue, BootstrapVueIcons } from 'bootstrap-vue';
+Vue.use(BootstrapVue);
+Vue.use(BootstrapVueIcons);
+import VueCookies from 'vue-cookies';
+Vue.use(VueCookies);
+axios.defaults.withCredentials = true;
 
-// import { BModal } from 'bootstrap-vue'
-// Vue.component('b-modal', BModal)
-// import { BFormTag } from 'bootstrap-vue'
-// Vue.component('b-form-tag', BFormTag)
-// import { BFormTags } from 'bootstrap-vue'
-// Vue.component('b-form-tags', BFormTags)
 import VueRouter from "vue-router";
 Vue.use(VueRouter);
 const router = new VueRouter({
@@ -79,7 +76,7 @@ Vue.config.productionTip = false;
 const shared_data = {
   username: localStorage.username,
   lastsearch: localStorage.lastsearch,
-  server_domain: "http://127.0.0.1:80",
+  server_domain: "http://127.0.0.1:3000",
   login(username) {
     localStorage.setItem("username", username);
     this.username = username;

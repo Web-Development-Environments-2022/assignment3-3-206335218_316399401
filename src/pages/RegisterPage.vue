@@ -66,6 +66,11 @@
         >
           Have length between 5-10 characters long
         </b-form-invalid-feedback>
+        <b-form-invalid-feedback
+          v-if="$v.form.password.required && !$v.form.password.valid"
+        >
+          Have at least one special character and one number
+        </b-form-invalid-feedback>
       </b-form-group>
 
       <b-form-group
@@ -161,7 +166,12 @@ export default {
       },
       password: {
         required,
-        length: (p) => minLength(5)(p) && maxLength(10)(p)
+        length: (p) => minLength(5)(p) && maxLength(10)(p),
+        valid: function(value) {
+                const containsNumber = /[0-9]/.test(value)
+                const containsSpecial = /[!"#$%&'()*+,-./:;<=>?@_`{}~]/.test(value)
+                return containsNumber && containsSpecial
+        }
       },
       confirmedPassword: {
         required,
@@ -187,9 +197,15 @@ export default {
 
           {
             username: this.form.username,
-            password: this.form.password
+            password: this.form.password,
+            firstname: this.form.firstName,
+            lastname: this.form.lastName,
+            country: this.form.country,
+            email: this.form.email
           }
         );
+        this.$root.toast("Register", "User created successfully", "success");
+
         this.$router.push("/login");
         // console.log(response);
       } catch (err) {

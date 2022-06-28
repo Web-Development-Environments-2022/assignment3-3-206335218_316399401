@@ -93,7 +93,7 @@ export default {
     },
     async Login() {
       try {
-        this.$root.store.server_domain = "http://127.0.0.1:80"; //TODO delete
+        // this.$root.store.server_domain = "http://127.0.0.1:80"; //TODO delete
         const response = await this.axios.post(
           // "https://test-for-3-2.herokuapp.com/user/Login",
           // main.server_domain + "/Login",
@@ -110,6 +110,8 @@ export default {
         // this.$root.loggedIn = true;
         console.log(this.$root.store.login);
         this.$root.store.login(this.form.username);
+        this.$root.toast("Login", "User logged in successfully", "success");
+
         this.$router.push("/");
       } catch (err) {
         console.log(err.response);
