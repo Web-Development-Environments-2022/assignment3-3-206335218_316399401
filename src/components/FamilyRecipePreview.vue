@@ -10,38 +10,41 @@
   >
   <b-row>
   <b-col>
-    <b-card-title> {{recipe.title}}</b-card-title>
+    <b-card-title><b> {{recipe.title}}</b></b-card-title>
     <img  :src="recipe.image" class="recipe-image" style="max-width: 17rem;"/>
   </b-col>
      <!--v-if="image_load"-->
      <b-col>
-    <b-card-text>{{ recipe.readyInMinutes }} minutes</b-card-text>
-
-    <b-card-text v-if="recipe.vegan">Vegan</b-card-text>
-    <b-card-text v-if="recipe.vegetarian">Vegetarian</b-card-text>
-    <b-card-text v-if="recipe.glutenFree">Gluten Free</b-card-text>
-    <!-- check -->
-
+    <b-card-text><b>Writer:</b> {{ recipe.writer }}</b-card-text>
+        <b-card-text><b>When it is customary to prepare?:</b> {{ recipe.customaryTime }} </b-card-text>
      </b-col>
-    <!-- <b-col>
+    <b-col>
         <div class="wrapped">
-            Ingredients:
+            <b>Ingredients:</b>
                 <b-card-text>{{ recipe.ingredients }}</b-card-text>
           </div>
      </b-col>
      <b-col>
         <div class="wrapped">
-            Instructions:
+            <b>Instructions:</b>
                 <b-card-text>{{ recipe.instructions }}</b-card-text>
           </div>
-     </b-col> -->
+     </b-col>
     </b-row>
   </b-card>
 </div>
 </template>
 
 <script>
+export default{
 
+    props: {
+    recipe: {
+      type: Object,
+      required: true
+    }
+  },
+}
 </script>
 
 <style>

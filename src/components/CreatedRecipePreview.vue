@@ -5,19 +5,19 @@
   <b-card
 
     img-top
-    style="max-width: 100rem;"
+    style="max-width: 500px;"
      class="recipe-preview"
   >
   <b-row>
-  <b-col>
+  <b-col md="8">
     <b-card-title> {{recipe.title}}</b-card-title>
     <img  :src="recipe.image" class="recipe-image" style="max-width: 17rem;"/>
   </b-col>
   <b-col>
-    
+
   </b-col>
      <!--v-if="image_load"-->
-     <b-col>
+     <b-col md="6">
     <b-card-text>{{ recipe.readyInMinutes }} minutes</b-card-text>
 
     <b-card-text v-if="recipe.vegan">Vegan</b-card-text>
@@ -25,7 +25,8 @@
     <b-card-text v-if="recipe.glutenFree">Gluten Free</b-card-text>
     <!-- check -->
 
-     </b-col>
+
+  </b-col>
     <!-- <b-col>
         <div class="wrapped">
             Ingredients:
@@ -56,7 +57,7 @@ export default{
 </script>
 
 <style>
-.recipe-preview {
+/* .recipe-preview {
   display: inline-block;
   width: 100%;
   height: 100%;
@@ -76,7 +77,7 @@ export default{
   margin-top: auto;
   margin-bottom: 30px;
   display: inline;
-  width: 98%;
+  width: 200%;
   height: auto;
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -101,7 +102,7 @@ export default{
 }
 
 .recipe-preview .recipe-footer ul.recipe-overview {
-  padding: 30px 10px;
+  padding: 50px 50px;
   width: 100%;
   display: -webkit-box;
   display: -moz-box;
@@ -117,5 +118,5 @@ export default{
   flex: 1 auto;
   table-layout: fixed;
   margin-bottom: 30px;
-}
+} */
 </style>

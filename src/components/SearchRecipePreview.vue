@@ -13,7 +13,7 @@
     class="mb-2"
   >
   <b-row>
-  <b-col>
+  <b-col >
     <b-card-title> {{recipe.title}}</b-card-title>
     <img  :src="recipe.image" class="recipe-image" style="max-width: 17rem;"/>
   </b-col>

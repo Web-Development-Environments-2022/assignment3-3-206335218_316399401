@@ -1,8 +1,5 @@
 <template>
-  <router-link
-    :to="{ name: 'recipe', params: { recipeId: recipe.id } }"
-    class="recipe-preview"
->
+  
     <!-- <div class="recipe-body">
       <img v-if="image_load" :src="recipe.image" class="recipe-image" />
     </div>
@@ -21,11 +18,14 @@
 
     <div>
   <b-card
-
+    class="recipe-preview"
     img-top
     style="max-width: 20rem;"
-    class="mb-2"
   >
+    <router-link
+    :to="{ name: 'recipe', params: { recipeId: recipe.id } }"
+    
+    >
     <b-card-title> {{recipe.title}}</b-card-title>
     <img  :src="recipe.image" class="recipe-image" style="max-width: 17rem;"/> <!--v-if="image_load"-->
     <b-card-text>{{ recipe.readyInMinutes }} minutes</b-card-text>
@@ -34,10 +34,12 @@
     <b-card-text v-if="recipe.vegetarian">Vegetarian</b-card-text>
     <b-card-text v-if="recipe.glutenFree">Gluten Free</b-card-text>
     <!-- check -->
-    <b-button @click="addToFavorites" variant="primary">Add to Favorites</b-button>
+    </router-link>
+    <b-button v-if="!isFav" @click="addToFavorites" variant="primary">Add to Favorites</b-button>
+    <b-button v-if="isFav" disabled>Add to Favorites</b-button>
   </b-card>
 </div>
-  </router-link>
+  
 </template>
 
 <script>
@@ -49,7 +51,7 @@ export default {
   // },
   data() {
     return {
-      // image_load: false
+      isFav: null
     };
   },
   props: {
@@ -57,6 +59,9 @@ export default {
       type: Object,
       required: true
     }
+  },
+  mounted() {
+    this.isFavorite()
   },
   methods: {
     async addToFavorites() {
@@ -80,10 +85,27 @@ export default {
         // this.$root.store.login(this.form.username);
         // this.$router.push("/");
         this.$root.toast("Favorites", "Recipe added to favorites successfully", "success");
+        this.isFav = true;
       } catch (err) {
         console.log(err.response);
         // this.form.submitError = err.response.data.message;
       }
+    },
+    async isFavorite(){
+      try{
+        const response = await this.axios.get (
+        this.$root.store.server_domain +"/user/isFavorite",{
+          params:{
+            recipeid: this.recipe.id
+          }
+        }
+      );
+      this.isFav = response.data;
+      } catch(err){
+        console.log(err.response);
+
+      }
+      
     }
   }
 };
