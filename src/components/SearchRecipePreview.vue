@@ -70,7 +70,6 @@ export default {
   methods: {
     async addToFavorites() {
       try {
-        // this.$root.store.server_domain = "http://127.0.0.1:80"; //TODO delete
         const response = await this.axios.post(
           // "https://test-for-3-2.herokuapp.com/user/Login",
           // main.server_domain + "/Login",
@@ -79,19 +78,13 @@ export default {
           // "http://132.73.84.100:80/Login",
 
           {
-            // username: this.form.username,
             recipeId: this.recipe.id
           }
         );
-        // console.log(response);
-        // this.$root.loggedIn = true;
-        // console.log(this.$root.store.login);
-        // this.$root.store.login(this.form.username);
-        // this.$router.push("/");
+
         this.$root.toast("Favorites", "Recipe added to favorites successfully", "success");
       } catch (err) {
         console.log(err.response);
-        // this.form.submitError = err.response.data.message;
       }
     },
     async createInstructions(){

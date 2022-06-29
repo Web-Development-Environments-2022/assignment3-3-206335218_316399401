@@ -56,7 +56,7 @@ export default {
     try {
       let response;
       // response = this.$route.params.response;
-
+      
       try {
         response = await this.axios.get(
           // "https://test-for-3-2.herokuapp.com/recipes/info",
@@ -113,6 +113,20 @@ export default {
       };
 
       this.recipe = _recipe;
+
+      try {
+        const response = await this.axios.post(
+          this.$root.store.server_domain + "/user/viewed",
+          {
+              recipeid: this.recipe.id
+
+          } );
+
+
+        // console.log(this.recipes);
+      } catch (error) {
+        console.log(error);
+      }
     } catch (error) {
       console.log(error);
     }

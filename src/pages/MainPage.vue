@@ -13,7 +13,7 @@
     <b-col>
       <router-link id="router" v-if="!$root.store.username" to="/login" tag="button"><b-button variant="outline-primary">You need to Login to view this</b-button></router-link>
     <!-- {{ !$root.store.username }} -->
-    <RecipePreviewList
+    <RecipePreviewList v-if="!$root.store.username"
       title="Last Viewed Recipes"
       :class="{
         RandomRecipes: true,
@@ -22,6 +22,7 @@
       }"
       disabled
     ></RecipePreviewList>
+    <LastViewedList v-if="$root.store.username" title="Last Viewed Recipes"></LastViewedList>
     </b-col>
     </b-row>
     <!-- <div
@@ -34,9 +35,12 @@
 
 <script>
 import RecipePreviewList from "../components/RecipePreviewList";
+import LastViewedList from "../components/LastViewedList";
+
 export default {
   components: {
-    RecipePreviewList
+    RecipePreviewList,
+    LastViewedList
   }
 };
 </script>

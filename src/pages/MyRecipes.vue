@@ -24,7 +24,6 @@ export default{
     },
     mounted() {
     this.updateRecipes();
-    console.log("mounted")
   },
     methods: {
       async updateRecipes() {
