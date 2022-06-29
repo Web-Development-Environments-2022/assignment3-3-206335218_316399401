@@ -2,6 +2,48 @@
   <div class="container">
     <h1 class="title">Register</h1>
     <b-form @submit.prevent="onRegister" @reset.prevent="onReset">
+    <b-form-group
+        id="input-group-firstname"
+        label-cols-sm="3"
+        label="First Name:"
+        label-for="firstname"
+      >
+        <b-form-input
+          id="firstname"
+          v-model="$v.form.firstname.$model"
+          type="text"
+          :state="validateState('firstname')"
+        ></b-form-input>
+        <b-form-invalid-feedback v-if="!$v.form.firstname.required">
+          first name is required
+        </b-form-invalid-feedback>
+
+        <b-form-invalid-feedback v-else-if="$v.form.firstname.required && !$v.form.firstname.alpha">
+          First name should contain only letters
+        </b-form-invalid-feedback>
+      </b-form-group>
+
+      <b-form-group
+        id="input-group-lastname"
+        label-cols-sm="3"
+        label="Last Name:"
+        label-for="lastname"
+      >
+        <b-form-input
+          id="lastname"
+          v-model="$v.form.lastname.$model"
+          type="text"
+          :state="validateState('lastname')"
+        ></b-form-input>
+        <b-form-invalid-feedback v-if="!$v.form.lastname.required">
+          last name is required
+        </b-form-invalid-feedback>
+
+        <b-form-invalid-feedback v-if="$v.form.lastname.required && !$v.form.lastname.alpha">
+          Last name should contain only letters
+        </b-form-invalid-feedback>
+      </b-form-group>
+
       <b-form-group
         id="input-group-username"
         label-cols-sm="3"
@@ -95,6 +137,27 @@
         </b-form-invalid-feedback>
       </b-form-group>
 
+      <b-form-group
+        id="input-group-email"
+        label-cols-sm="3"
+        label="email:"
+        label-for="email"
+      >
+        <b-form-input
+          id="email"
+          v-model="$v.form.email.$model"
+          type="text"
+          :state="validateState('email')"
+        ></b-form-input>
+        <b-form-invalid-feedback v-if="!$v.form.email.required">
+          email is required
+        </b-form-invalid-feedback>
+
+        <b-form-invalid-feedback v-if="!$v.form.email.email">
+          please enter validate email address
+        </b-form-invalid-feedback>
+      </b-form-group>
+
       <b-button type="reset" variant="danger">Reset</b-button>
       <b-button
         type="submit"
@@ -141,8 +204,8 @@ export default {
     return {
       form: {
         username: "",
-        firstName: "",
-        lastName: "",
+        firstname: "",
+        lastname: "",
         country: null,
         password: "",
         confirmedPassword: "",
@@ -156,6 +219,14 @@ export default {
   },
   validations: {
     form: {
+      firstname:{
+        required,
+        alpha
+      },
+      lastname:{
+        required,
+        alpha
+      },
       username: {
         required,
         length: (u) => minLength(3)(u) && maxLength(8)(u),
@@ -176,6 +247,10 @@ export default {
       confirmedPassword: {
         required,
         sameAsPassword: sameAs("password")
+      },
+      email:{
+        required,
+        email
       }
     }
   },
@@ -198,8 +273,8 @@ export default {
           {
             username: this.form.username,
             password: this.form.password,
-            firstname: this.form.firstName,
-            lastname: this.form.lastName,
+            firstname: this.form.firstname,
+            lastname: this.form.lastname,
             country: this.form.country,
             email: this.form.email
           }
@@ -225,8 +300,8 @@ export default {
     onReset() {
       this.form = {
         username: "",
-        firstName: "",
-        lastName: "",
+        firstname: "",
+        lastname: "",
         country: null,
         password: "",
         confirmedPassword: "",

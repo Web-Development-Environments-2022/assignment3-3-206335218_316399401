@@ -13,6 +13,9 @@
     <b-card-title> {{recipe.title}}</b-card-title>
     <img  :src="recipe.image" class="recipe-image" style="max-width: 17rem;"/>
   </b-col>
+  <b-col>
+    
+  </b-col>
      <!--v-if="image_load"-->
      <b-col>
     <b-card-text>{{ recipe.readyInMinutes }} minutes</b-card-text>
