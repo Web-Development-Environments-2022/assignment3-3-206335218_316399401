@@ -7,7 +7,9 @@
     <b-col>
       <b-row v-for="r in recipes" :key="r.id">
         <RecipePreview class="recipePreview" :recipe="r" />
+        <br>
       </b-row>
+      <br>
       <b-button @click="updateRecipes" variant="outline-primary">Random</b-button>
 
     </b-col>

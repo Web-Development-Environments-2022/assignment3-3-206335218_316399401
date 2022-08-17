@@ -117,7 +117,7 @@ export default {
   width: 90%;
   height: 100%;
   position: relative;
-  margin: 10px 10px;
+  margin: 20px 20px 20px 20px;
 }
 .recipe-preview:visited{
   color: purple;
@@ -174,7 +174,8 @@ export default {
   -ms-flex: 1 auto;
   flex: 1 auto;
   table-layout: fixed;
-  margin-bottom: 0px;
+  margin-bottom: 20px;
+  margin-top: 20px;
 }
 
 .recipe-preview .recipe-footer ul.recipe-overview li {
